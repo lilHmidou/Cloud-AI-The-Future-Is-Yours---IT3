@@ -10,28 +10,26 @@ resource "google_compute_subnetwork" "subnet" {
   network       = google_compute_network.vpc.id
 }
 
-resource "google_compute_firewall" "allow_ssh" {
-  name    = "${var.ssh_user}-ssh"
+resource "google_compute_firewall" "ssh" {
+  name    = "allow-ssh"
   network = google_compute_network.vpc.name
 
   allow {
-    protocol = "ssh"
+    protocol = "tcp"
     ports    = ["22"]
   }
 
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["demo-ssh"]
 }
 
-resource "google_compute_firewall" "allow_web" {
-  name    = "${var.ssh_user}-web"
+resource "google_compute_firewall" "http" {
+  name    = "allow-http"
   network = google_compute_network.vpc.name
 
   allow {
-    protocol = "http"
-    ports    = [tostring(var.web_port)]
+    protocol = "tcp"
+    ports    = ["80"]
   }
 
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["demo-web"]
 }
