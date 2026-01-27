@@ -3,7 +3,7 @@ resource "google_compute_address" "public_ip" {
   region = var.region
 }
 
-resource "google_compute_instance" "nginx_vm" {
+resource "google_compute_instance" "vm" {
   name         = "nginx-vm"
   machine_type = "e2-micro"
   zone         = var.zone
