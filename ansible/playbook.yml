@@ -1,21 +1,20 @@
 - name: Update APT cache, install nginx, and ensure it is running
   hosts: all
-  become: yes
+  become: true
   tasks:
     - name: Update APT cache
       ansible.bultin.apt:
         name: update cache
         state: present
-        update_cache: yes
+        update_cache: true
 
     - name: Install nginx
       ansible.builtin.apt:
         name: nginx
         state: present
-        update_cache: yes
 
     - name: Ensure nginx is started and enabled
       service:
         name: nginx
         state: started
-        daemon_reload: yes
+        daemon_reload: true
