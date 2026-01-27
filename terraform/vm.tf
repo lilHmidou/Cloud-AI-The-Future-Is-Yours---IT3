@@ -1,3 +1,6 @@
+resource "google_compute_address" "static_ip" {
+  name = "nginx-static-ip"
+}
 resource "google_compute_instance" "vm" {
   for_each     = local.roles
   name         = "${local.name_prefix}-${each.key}"
@@ -18,5 +21,8 @@ resource "google_compute_instance" "vm" {
 
   network_interface {
     subnetwork = google_compute_subnetwork.subnet.id
+    access_config {
+      nat_ip = google_compute_address.static_ip.address
+    }
   }
 }

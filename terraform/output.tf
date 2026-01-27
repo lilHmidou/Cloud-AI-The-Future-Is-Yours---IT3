@@ -1,4 +1,3 @@
-output "public_ip" {
-  description = "The public IP address of the instance"
-  value       = google_compute_address.public_ip["web"].address
+output "project_id" {
+  value = "it3-terraform-tp"
 }

@@ -6,7 +6,7 @@ resource "google_compute_network" "vpc" {
 resource "google_compute_subnetwork" "subnet" {
   name          = "${var.ssh_user}-subnet"
   region        = var.region
-  ip_cidr_range = "10.10.0.0/24"
+  ip_cidr_range = "10.0.1.0/24"
   network       = google_compute_network.vpc.id
 }
 
@@ -15,7 +15,7 @@ resource "google_compute_firewall" "allow_ssh" {
   network = google_compute_network.vpc.name
 
   allow {
-    protocol = "tcp"
+    protocol = "ssh"
     ports    = ["22"]
   }
 
@@ -28,7 +28,7 @@ resource "google_compute_firewall" "allow_web" {
   network = google_compute_network.vpc.name
 
   allow {
-    protocol = "tcp"
+    protocol = "http"
     ports    = [tostring(var.web_port)]
   }
 
