@@ -1,1 +1,1 @@
-project_id   = "it3-terraform-tp"
+project_id   = "terraform-tp"
